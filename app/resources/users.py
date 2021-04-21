@@ -20,10 +20,11 @@ class UsersResource(Resource):
     
     def post(self):
         try:
-            if request.headers.get('Content-Type') == 'application/json':
-                json_data = request.json
-                print(json_data)
-                return Response('ok', mimetype='application/json', status=200)
+            if not request.headers.get('Content-Type') == 'application/json':                
+                raise KeyError
+            json_data = request.json
+            print(json_data)
+            return Response(json_data, mimetype='application/json', status=200)
             
         except KeyError as ex:
             print(ex)

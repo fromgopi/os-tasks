@@ -21,8 +21,9 @@ def create_app():
     load_dotenv(dotenv_path=DOTENV_PATH)
     load_config(app)
     # initialize_db(app=app)
-    api = Api(app)
-    load_resources(api=api)
+    load_blueprints(app=app)
+    # api = Api(app)
+    # load_resources(api=api)
     load_db()
     return app
 
@@ -59,3 +60,8 @@ def load_db():
     loads db
     """
     db = Database()
+
+def load_blueprints(app, URL_PREFIX=os.getenv('ROUTE_PREFIX')):
+    from app.resources.user.controllers.user import USER_API as user_blueprint
+    app.register_blueprint(user_blueprint, url_prefix=URL_PREFIX)
+    pass
