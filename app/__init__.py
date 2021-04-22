@@ -62,6 +62,13 @@ def load_db():
     db = Database()
 
 def load_blueprints(app, URL_PREFIX=os.getenv('ROUTE_PREFIX')):
+    """
+    Loads all the blueprints into flask instance
+
+    Args:
+        app (Flask-App): Flask instance
+        URL_PREFIX (Str): URL Prefix
+    """
     from app.resources.user.controllers.user import USER_API as user_blueprint
     app.register_blueprint(user_blueprint, url_prefix=URL_PREFIX)
-    pass
+    
